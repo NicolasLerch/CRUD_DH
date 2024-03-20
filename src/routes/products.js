@@ -31,8 +31,8 @@ router.post('/create', uploadFile.single('avatar'), productsController.store);
 
 
 // /*** EDIT ONE PRODUCT ***/
-router.get('/edit/:id', productsController.edit); 
-// router.???('/:id', productsController.update); 
+router.get('/:id/edit', productsController.edit); 
+router.put('/:id/update', productsController.update);
 
 
 // /*** DELETE ONE PRODUCT***/ 

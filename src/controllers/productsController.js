@@ -75,24 +75,48 @@ const controller = {
 	edit: (req, res) => {
 		let productID = req.params.id;
 		let product = products.find(product => product.id == productID);
-		let editedProduct = {
-			id: nuevoID,
+		res.render('product-edit-form', {productToEdit : product});
+	},
+	// Update - Method to update
+	update: function (req, res) {
+		let productID = req.params.id;
+		let producToEdit = products[productID-1];
+		console.log(producToEdit);
+		// res.send(producToEdit)
+
+		let updatedProduct = {
+			id: productID, // Convert ID to integer
 			name: req.body.name,
 			price: req.body.price,
 			discount: req.body.discount,
 			category: req.body.category,
 			description: req.body.description
+		};
+	
+		// Find the index of the product in the products array
+		let productIndex = products.findIndex(product => product.id == productID);
+		console.log(productIndex);
+	
+		if (productIndex !== -1) { // Product found
+			// Update the product in the array
+			products[productIndex] = updatedProduct;
+	
+			// Convert the updated products array to JSON
+			let jsonProducts = JSON.stringify(products);
+	
+			// Write the updated JSON back to the file
+			// fs.writeFileSync(productsFilePath, jsonProducts);
+			fs.writeFileSync('./src/data/productsDataBase.json', jsonProducts);
+
+			// redirect('/products')
+	
+			res.send(updatedProduct); // Send the updated product as response
+		} else {
+			// Product not found
+			res.status(404).send("Product not found");
 		}
-		let jsonProducts = JSON.stringify(products);
-		
 
 
-		res.render('product-edit-form', {productToEdit : product});
-		// res.send(productoAEditar);
-	},
-	// Update - Method to update
-	update: (req, res) => {
-		// Do the magic
 	},
 
 	// Delete - Delete one product from DB
