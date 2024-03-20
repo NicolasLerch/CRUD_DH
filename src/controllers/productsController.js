@@ -73,7 +73,22 @@ const controller = {
 
 	// Update - Form to edit
 	edit: (req, res) => {
-		// Do the magic
+		let productID = req.params.id;
+		let product = products.find(product => product.id == productID);
+		let editedProduct = {
+			id: nuevoID,
+			name: req.body.name,
+			price: req.body.price,
+			discount: req.body.discount,
+			category: req.body.category,
+			description: req.body.description
+		}
+		let jsonProducts = JSON.stringify(products);
+		
+
+
+		res.render('product-edit-form', {productToEdit : product});
+		// res.send(productoAEditar);
 	},
 	// Update - Method to update
 	update: (req, res) => {

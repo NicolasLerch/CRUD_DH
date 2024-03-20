@@ -19,7 +19,7 @@ const productsController = require('../controllers/productsController');
 router.get('/', productsController.index);
 
 /*** GET ONE PRODUCT ***/ 
-router.get('/:id', productsController.detail); 
+// router.get('/:id', productsController.detail); 
 
 
 // /*** CREATE ONE PRODUCT ***/ 
@@ -31,7 +31,7 @@ router.post('/create', uploadFile.single('avatar'), productsController.store);
 
 
 // /*** EDIT ONE PRODUCT ***/
-// router.???('/:id/???', productsController.edit); 
+router.get('/edit/:id', productsController.edit); 
 // router.???('/:id', productsController.update); 
 
 
