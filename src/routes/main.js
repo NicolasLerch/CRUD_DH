@@ -7,6 +7,6 @@ const mainController = require('../controllers/mainController');
 
 router.get('/', mainController.index);
 router.get('/create', mainController.newProduct);
-// router.???('/search', mainController.search); 
+router.get('/search', mainController.search); 
 
 module.exports = router;

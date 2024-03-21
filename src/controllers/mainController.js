@@ -15,9 +15,16 @@ const controller = {
 		res.render('product-create-form');
 	},
 
-	search: (req, res) => {
-		// Do the magic
-	},
+	search: function(req, res) {
+		try{
+			let searched = req.query.keywords;
+			let result = products.filter(product => product.name.toLowerCase().includes(searched.toLowerCase()));
+			res.render('results', {result : result});
+		} catch {
+			res.status(404).render('Product not found');
+		}
+		
+	}
 };
 
 module.exports = controller;

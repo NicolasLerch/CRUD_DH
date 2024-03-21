@@ -22,7 +22,8 @@ function getMaxId(array) {
 const controller = {
 	// Root - Show all products in JSON
 	index: (req, res) => {
-		res.send(fs.readFileSync('src/data/productsDataBase.json', 'utf-8'));
+		// res.send(fs.readFileSync('src/data/productsDataBase.json', 'utf-8'));
+		res.render('products', {product : products});
 		// res.send(productService.getAll);
 		// productService.getAll;
 	},
@@ -53,13 +54,12 @@ const controller = {
 	
 	// Create -  Method to store
 	store: function (req, res) {
-		// let jsonProduct = JSON.stringify(controller.create());
-		// let jsonProducts = JSON.stringify(products);
 		let maxID = getMaxId(products);
 		let nuevoID = maxID + 1;
 		let newProduct = {
-			id: nuevoID,
+			id: parseInt(nuevoID),
 			name: req.body.name,
+			image: req.file.filename,
 			price: req.body.price,
 			discount: req.body.discount,
 			category: req.body.category,
@@ -85,7 +85,7 @@ const controller = {
 		// res.send(producToEdit)
 
 		let updatedProduct = {
-			id: productID, // Convert ID to integer
+			id: parseInt(productID), // Convert ID to integer
 			name: req.body.name,
 			price: req.body.price,
 			discount: req.body.discount,
@@ -115,13 +115,16 @@ const controller = {
 			// Product not found
 			res.status(404).send("Product not found");
 		}
-
-
 	},
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
-		// Do the magic
+		let productID = parseInt(req.params.id);
+		products.splice(productID - 1, 1);
+		console.log(products);
+		let jsonProducts = JSON.stringify(products);
+		fs.writeFileSync('./src/data/productsDataBase.json', jsonProducts);
+		res.send(products);
 	}
 };
 

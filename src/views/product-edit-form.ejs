@@ -43,8 +43,14 @@
 					<div class="col-12">
 						<button type="submit" class="buy-now-button">Guardar producto</button>
 					</div>
+
 				</div>
 			</form>
+			<div class="col-12">
+				<form method="POST" action="/products/<%= productToEdit.id %>/delete?_method=DELETE">
+					<button type="submit" class="buy-now-button">Eliminar producto</button>
+				</form>						
+			</div>
 		</div>
 
 	</div>
