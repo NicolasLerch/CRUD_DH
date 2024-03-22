@@ -1,4 +1,4 @@
-const { log } = require('console');
+// const { log } = require('console');
 const fs = require('fs');
 const path = require('path');
 
@@ -45,11 +45,12 @@ const controller = {
 
 	// Create - Form to create
 	create: function (req, res) {
-		let nuevoProducto = req.body;
-		let nuevaLista = products.push(nuevoProducto);
-		console.log(products);
-		res.send(products);
-		return nuevoProducto;
+		// let nuevoProducto = req.body;
+		// // let nuevaLista = products.push(nuevoProducto);
+		// console.log(products);
+		// res.send(products);
+		// return nuevoProducto;
+		res.send('esto es una prueba')
 	},
 	
 	// Create -  Method to store
